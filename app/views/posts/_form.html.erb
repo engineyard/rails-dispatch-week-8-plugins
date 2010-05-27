@@ -1,0 +1,11 @@
+<%= form_for(@post) do |form| %>
+  <%= form.error_messages %>
+
+  <%= form.label :title, "Title" %>
+  <%= form.text_field :title %>
+
+  <%= form.label :body, "Body" %>
+  <%= form.text_area :body %>
+
+  <%= form.submit %>
+<% end %>

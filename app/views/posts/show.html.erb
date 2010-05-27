@@ -1,0 +1,29 @@
+<h1><%= @post.title %></h1>
+<div class="entry">
+  <%= @post.body %>
+</div>
+
+<h2>Comments</h2>
+
+<div class="comments">
+  <% @post.comments.each do |comment| %>
+    <h4>By: <%= comment.author %></h4>
+    <div class="comment">
+      <%= comment.body %>
+    </div>
+    <p>
+      <%= button_to "Delete", [@post, comment], 
+          :confirm => "Are you sure?", :method => :delete %>
+    </p>
+  <% end %>
+</div>
+
+<%= form_for [@post, Comment.new] do |form| %>
+  <%= form.error_messages %>
+  <%= form.label :author, "Name" %>
+  <%= form.text_field :author %>
+
+  <%= form.text_area :body %>
+
+  <%= form.submit %>
+<% end %>
