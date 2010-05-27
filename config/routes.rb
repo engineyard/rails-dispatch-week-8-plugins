@@ -1,7 +1,15 @@
 Blogin15::Application.routes.draw do |map|
+  resources :contact_forms
+
+  devise_for :authors
+
+  resources :authors
+
   resources :posts do
     resources :comments
   end
+
+  root :to => "posts#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

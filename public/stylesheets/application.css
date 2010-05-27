@@ -16,7 +16,7 @@ a { color: #000; }
 a:visited { color: #666; }
 a:hover { color: #fff; background-color:#000; }
 
-div.field, div.actions {
+div.field, div.input, div.actions {
   margin-bottom: 10px;
 }
 
@@ -29,7 +29,7 @@ input, textarea {
   padding: 5px;
 }
 
-input[type=text], textarea {
+input[type=text], input[type=email], input[type=password], textarea {
   border: 1px solid #999;
   width: 500px;
 }

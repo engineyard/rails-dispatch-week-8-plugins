@@ -8,6 +8,15 @@
   <%= auto_discovery_link_tag(:atom, posts_path(:atom)) %>
 </head>
 <body>
+<div id="author_nav">
+  <% if author_signed_in? %>
+    Signed in as <%= current_author.name %>.
+    <%= link_to "Edit", edit_author_path(current_author) %> |
+    <%= link_to "Sign out", destroy_author_session_path %>
+  <% else %>
+    <%= link_to "Sign in", new_author_session_path %>
+  <% end %>
+</div>
 
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>

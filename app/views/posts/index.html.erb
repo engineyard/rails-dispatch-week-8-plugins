@@ -1,12 +1,14 @@
 <h1>My Blog!</h1>
 
 <% @posts.each do |post| %>
-<h2><%= link_to post.title, post %></h2>
+<h2><%= link_to post.title, post %></h2> by <%= post.author.name %>
 <div class="entry">
   <%= post.body %>
-  <%= link_to "Edit", [:edit, post] %>
-  <%= button_to "Delete", post,
-      :confirm => "Are you sure?", :method => :delete %>
+  <% if author_signed_in? %>
+    <%= link_to "Edit", [:edit, post] %>
+    <%= button_to "Delete", post,
+        :confirm => "Are you sure?", :method => :delete %>
+  <% end %>
   <hr/>
 </div>
 <% end %>

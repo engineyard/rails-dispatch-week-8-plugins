@@ -1,8 +1,9 @@
 class PostsController < ApplicationController  
-  respond_to :html, :atom
+  respond_to :atom, :only => :index
+  before_filter :authenticate_author!, :except => [:index, :show]
 
   def index
-    @posts = Post.order("created_at desc")
+    @posts = Post.order("created_at desc").includes(:author)
     respond_with @posts
   end
 
@@ -16,13 +17,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(params[:post])
-
-    if @post.save
-      redirect_to posts_path
-    else
-      render "new"
-    end
+    @post = current_author.posts.build(params[:post])
+    @post.save
+    respond_with(@post)
   end
 
   def edit
@@ -31,17 +28,13 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find_by_id(params[:id])
-
-    if @post.update_attributes(params[:post])
-      redirect_to posts_path
-    else
-      render "edit"
-    end
+    @post.update_attributes(params[:post])
+    respond_with(@post)
   end
 
   def destroy
-    post = Post.find_by_id(params[:id])
-    post.destroy
-    redirect_to posts_path, :notice => "#{post.title.inspect} was deleted"
+    @post = Post.find_by_id(params[:id])
+    @post.destroy
+    respond_with(@post)
   end
 end

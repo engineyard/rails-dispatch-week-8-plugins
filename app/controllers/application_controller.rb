@@ -1,14 +1,8 @@
+require "application_responder"
+
 class ApplicationController < ActionController::Base
+  self.responder = ApplicationResponder
+  respond_to :html
+
   protect_from_forgery
-
-  before_filter :authenticate, :except => [:index, :show]
-
-private
-
-  def authenticate
-    authenticate_or_request_with_http_basic do |user, pass|
-      user == "admin" && pass == "sekrit"
-    end
-  end
-
 end

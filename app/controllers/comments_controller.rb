@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_filter :authenticate_author!, :only => :destroy
+
   before_filter do
     @post = Post.find_by_id(params[:post_id])
   end

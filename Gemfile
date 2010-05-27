@@ -1,6 +1,10 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.0.beta3'
+gem 'responders'
+gem 'simple_form'
+gem 'devise', '1.1.rc1'
+gem 'mail_form'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
